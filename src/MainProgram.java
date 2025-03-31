@@ -8,7 +8,7 @@ class MainProgram {
     private static int[] numbers;
 
     public static void main(String[] args){
-        withNegatives = false;
+        withNegatives = true;
         maxAbsolute = 100;
         numbers = new int[10];
         fillArray(numbers, withNegatives, maxAbsolute);
@@ -20,6 +20,14 @@ class MainProgram {
         System.out.println("Summe aller Zahlen im Array: " + sumUp(numbers));
         System.out.println("In diesem Array gibt es " + countNegatives(numbers) + " negative Zahlen.");
         System.out.println("Summe der negativen Zahlen: " + sumUpNegatives(numbers));
+        System.out.println("Die größte Zahl: " + findMaximum(numbers));
+        System.out.println("Der Index der größten Zahl: " + findMaximumIndex(numbers));
+        System.out.println("Die größte Zahl erscheint " + countMaximum(numbers) + " Mal.");
+        if(isSorted(numbers)){
+            System.out.println("Die Werte im Array sind aufsteigend sortiert.");
+        } else {
+            System.out.println("Die Werte im Array sind NICHT aufsteigend sortiert.");
+        }
     }
 
     private static void fillArray(int[] array, boolean wN, int maxA){
@@ -137,7 +145,18 @@ class MainProgram {
      */
     private static int countMaximum(int[] array){
         int result = 0;
-        return result;
+        int haeufigkeit = 1;
+        for(int i = 0; i < array.length; i++){
+            if(array[i] > result){
+                result = array[i];
+                haeufigkeit = 1;
+            } else {
+                if(array[i] == result){
+                    haeufigkeit += 1;
+                }
+            }
+        }
+        return haeufigkeit;
     }
 
 
@@ -149,7 +168,7 @@ class MainProgram {
     private static boolean isSorted(int[] array){
         boolean result = false;
         int a = 1;
-        for(int i = 0; i < array.length; i++){
+        for(int i = 1; i < array.length; i++){
             if(array[i] >= array[i-1]){
                 result = true;
             } else {
