@@ -23,11 +23,21 @@ class MainProgram {
         System.out.println("Die größte Zahl: " + findMaximum(numbers));
         System.out.println("Der Index der größten Zahl: " + findMaximumIndex(numbers));
         System.out.println("Die größte Zahl erscheint " + countMaximum(numbers) + " Mal.");
+
         if(isSorted(numbers)){
             System.out.println("Die Werte im Array sind aufsteigend sortiert.");
         } else {
             System.out.println("Die Werte im Array sind NICHT aufsteigend sortiert.");
         }
+
+        if(checkArray(numbers)){
+            System.out.println("Dieses Feld ist ein Palindrom.");
+        } else {
+            System.out.println("Dieses Feld ist KEIN Palindrom.");
+        }
+
+        System.out.println("Neue Array");
+        increaseArray(numbers, 17);
     }
 
     private static void fillArray(int[] array, boolean wN, int maxA){
@@ -112,8 +122,8 @@ class MainProgram {
      * Tipp: Versuchen Sie, mit einem Durchlauf durch das Array zu kommen.
      */
     private static int findMaximum(int[] array){
-        int result = 0;
-        for(int i = 0; i < array.length; i++){
+        int result = array[0];
+        for(int i = 1; i < array.length; i++){
             if(array[i] > result){
                 result = array[i];
             }
@@ -128,9 +138,9 @@ class MainProgram {
      * Tipp: Versuchen Sie, mit einem Durchlauf durch das Array zu kommen.
      */
     private static int findMaximumIndex(int[] array){
-        int result = 0;
+        int result = array[0];
         int index = 0;
-        for(int i = 0; i < array.length; i++){
+        for(int i = 1; i < array.length; i++){
             if(array[i] > result){
                 index = i;
             }
@@ -144,9 +154,9 @@ class MainProgram {
      * übergeben bekommt und die Häufigkeit der größten Zahl in diesem Array zurückgibt.
      */
     private static int countMaximum(int[] array){
-        int result = 0;
+        int result = array[0];
         int haeufigkeit = 1;
-        for(int i = 0; i < array.length; i++){
+        for(int i = 1; i < array.length; i++){
             if(array[i] > result){
                 result = array[i];
                 haeufigkeit = 1;
@@ -165,20 +175,29 @@ class MainProgram {
      * übergeben bekommt. Die Methode isSorted soll true zurückgeben, falls die im Array enthaltenen Werte aufsteigend sortiert sind.
      * Sonst soll false zurückgegeben werden.
      */
-    private static boolean isSorted(int[] array){
-        boolean result = false;
-        int a = 1;
-        for(int i = 1; i < array.length; i++){
-            if(array[i] >= array[i-1]){
-                result = true;
-            } else {
-                a = 2;
+    //private static boolean isSorted(int[] array){
+    //    boolean result = false;
+    //    int a = 1;
+    //    for(int i = 1; i < array.length; i++){
+    //        if(array[i] >= array[i-1]){
+    //            result = true;
+    //        } else {
+    //            a = 2;
+    //        }
+    //    }
+    //    if(a == 2){
+    //        result = false;
+    //    }
+    //    return result;
+    //}
+
+    private static boolean isSorted(int[] array) {
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] < array[i-1]) {
+                return false;
             }
         }
-        if(a == 2){
-            result = false;
-        }
-        return result;
+        return true;
     }
 
 
@@ -189,6 +208,32 @@ class MainProgram {
      * ob es sich bei dem Array um ein Palindrom handelt.
      * Die Methode soll einen Wert des Typs boolean zurückgeben.
      */
+    //private static boolean checkArray(int[] array) {
+    //    boolean result = false;
+    //    int a = 1;
+    //    for (int i = 0; i < array.length; i++) {
+    //        if (array[i] == array[array.length - i - 1]) {
+    //            result = true;
+    //        } else {
+    //            a = 2;
+    //        }
+    //    }
+    //    if (a == 2) {
+    //        result = false;
+    //    }
+    //    return result;
+    //}
+
+    private static boolean checkArray(int[] array) {
+        boolean result = true;
+        for (int i = 0; i < array.length && result == true; i++) {
+            if (array[i] != array[array.length - i - 1]) {
+                result = false;
+            }
+        }
+        return result;
+    }
+
 
 
 
@@ -198,6 +243,11 @@ class MainProgram {
      * Beispiel: Werden ein Array mit den Elementen 80,7,1,56,11,72,43,37 als erstes und der Wert 17 als zweites Argument übergeben,
      * so soll ein neues(!) Array mit den Werten 97,24,18,73,28,89,60,54 zurückgegeben werden.
      */
-
+    private static void increaseArray(int[] array, int zahlBuff){
+        for (int i = 0; i < array.length; i++) {
+            array[i] += zahlBuff;
+            System.out.println("Index: "+i+" --- Zahl: "+array[i]);
+        }
+    }
 
 }
