@@ -37,8 +37,7 @@ class MainProgram {
         }
 
         System.out.println("Neue Array");
-        System.out.println("Das neue Feld: ");
-        showArray(increaseArray(numbers, 17));
+        increaseArray(numbers, 17);
     }
 
     private static void fillArray(int[] array, boolean wN, int maxA){
@@ -227,7 +226,7 @@ class MainProgram {
 
     private static boolean checkArray(int[] array) {
         boolean result = true;
-        for (int i = 0; i < array.length && result; i++) {
+        for (int i = 0; i < array.length && result == true; i++) {
             if (array[i] != array[array.length - i - 1]) {
                 result = false;
             }
@@ -244,12 +243,11 @@ class MainProgram {
      * Beispiel: Werden ein Array mit den Elementen 80,7,1,56,11,72,43,37 als erstes und der Wert 17 als zweites Argument übergeben,
      * so soll ein neues(!) Array mit den Werten 97,24,18,73,28,89,60,54 zurückgegeben werden.
      */
-    private static int[] increaseArray(int[] array, int zahlBuff){
-        int[] newArray = new int[array.length];
+    private static void increaseArray(int[] array, int zahlBuff){
         for (int i = 0; i < array.length; i++) {
-            newArray[i] = array[i] + zahlBuff;
+            array[i] += zahlBuff;
+            System.out.println("Index: "+i+" --- Zahl: "+array[i]);
         }
-        return newArray;
     }
 
 }
